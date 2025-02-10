@@ -6,16 +6,30 @@ lspconfig.pyright.setup {}
 lspconfig.ts_ls.setup {
     capabilities = capabilities,
 }
+
 lspconfig.prismals.setup {}
 lspconfig.cssls.setup {
     capabilities = capabilities
 }
 -- remove it in case it doesn't work
-lspconfig.emmet_ls.setup {
-    on_attach = on_attach,
+-- lspconfig.emmet_ls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     flags = lsp_flags
+-- }
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
     capabilities = capabilities,
-    flags = lsp_flags
-}
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
 lspconfig.golangci_lint_ls.setup {}
 lspconfig.rust_analyzer.setup {
   settings = {
