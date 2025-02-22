@@ -12,14 +12,6 @@ return {
       },
     })
     vim.cmd("colorscheme kanagawa")
-      -- Fix transparency issue
-    vim.cmd [[
-      highlight Normal guibg=NONE
-      highlight NormalNC guibg=NONE
-      highlight LineNr guibg=NONE
-      highlight CursorLineNr guibg=NONE
-    ]]
-
     -- vim.cmd("colorscheme kanagawa-dragon")
     --  vim.cmd("colorscheme kanagawa-wave")
   end,
