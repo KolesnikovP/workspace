@@ -2,7 +2,15 @@ return {
   {  "folke/which-key.nvim",
     config = function()
       local wk = require("which-key")
-
+      wk.setup({
+        win = {
+          border = "single",  -- Adds a border around the popup
+          no_overlap = true,  -- Prevents overlap with the cursor
+          padding = {1, 2},   -- Extra padding for better appearance
+          title = true,       -- Adds a title (if applicable)
+          title_pos = "center", -- Centers the title
+        },
+      })
       wk.register({
         f = {
           name = "Find",
@@ -28,7 +36,8 @@ return {
           a = "Action",
           s = "Symbol"
         }
-      }, {prefix = "<leader>"})
+      },
+      {prefix = "<leader>"})
     end
   }
 }

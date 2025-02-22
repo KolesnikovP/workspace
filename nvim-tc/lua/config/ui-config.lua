@@ -24,4 +24,6 @@ vim.cmd [[
   highlight TelescopeResultsBorder guifg=#aaaaaa guibg=NONE
   highlight TelescopePreviewNormal guibg=NONE
   highlight TelescopePreviewBorder guifg=#aaaaaa guibg=NONE
+
+  highlight WhichKeyBorder guifg=#aaaaaa
 ]]
