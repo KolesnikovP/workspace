@@ -35,4 +35,16 @@ vim.keymap.set("n", "<leader>x", ":BufferLinePickClose<CR>")
 vim.keymap.set("n", "<leader>X", ":BufferLineCloseRight<CR>")
 vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
 
+-- Terminal
+vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<CR>")
+vim.keymap.set("n", "<leader>th", ":ToggleTerm direction=horizontal<CR>")
+vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical size=40<CR>")
+    local opts = {buffer = 0}
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 

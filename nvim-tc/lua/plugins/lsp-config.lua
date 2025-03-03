@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {"lua_ls"}
+        ensure_installed = {"lua_ls", "gopls"}
       })
     end
   },
@@ -31,6 +31,16 @@ return {
       })
       lspconfig.lua_ls.setup({
         capabilities = capabilities
+      })
+      lspconfig.gopls.setup({  -- Add Go LSP
+        capabilities = capabilities,
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          }
+        }
       })
 
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
