@@ -43,6 +43,12 @@ return {
         }
       })
 
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "single",
+        max_height = 25,
+        max_width = 120,
+      })
+
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
       vim.keymap.set('n', '<leader>gd', vim.lsp.buf.declaration, {})
       vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})

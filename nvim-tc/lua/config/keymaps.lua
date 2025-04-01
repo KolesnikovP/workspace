@@ -15,6 +15,8 @@ vim.keymap.set('n', 'gr', builtin.lsp_references,
 vim.keymap.set('n', 'gd', builtin.lsp_definitions,
                {noremap = true, silent = true})
 
+-- Diagnostics
+vim.keymap.set('n', '<leader>do', ':lua vim.diagnostic.open_float()<CR>')
 
 -- NEOTREE
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left <CR>') -- carriage return 
