@@ -1,15 +1,21 @@
-fish
-github-copilot
-nnvim-kikstart
-.git
-nvim-kikstart-copy
-nvim-nvchad
-nvim-nvchad-go
-iterm2
-configstore
-xbuild
-raycast
+# Track only selected config folders
 
+# Ignore everything at repo root by default
+/*
+
+# Keep this .gitignore tracked
+!/.gitignore
+
+# Allow these folders and their contents
+!/aerospace/
+!/aerospace/**
+!/nvim-tc/
+!/nvim-tc/**
+
+# Common noise to ignore inside allowed folders
 .DS_Store
-
-
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.log

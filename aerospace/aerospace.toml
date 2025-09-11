@@ -60,7 +60,7 @@ automatically-unhide-macos-hidden-apps = false
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
     inner.horizontal = 5
-    inner.vertical =   5 
+    inner.vertical =   10 
     outer.left =       5
     outer.bottom =     5
     outer.top =        5
@@ -195,7 +195,10 @@ alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
-
+# MONITORS 
+[workspace-to-monitor-force-assignment]
+    1 = 'main'                       # Main monitor
+    2 = 'secondary'
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
