@@ -61,7 +61,7 @@ return {
     extensions = {}
 ]]
       options = {
-        theme = 'dracula'
+        theme = 'auto'
       }
     })
   end

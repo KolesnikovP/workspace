@@ -18,7 +18,14 @@ return {
       vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
     end
 
-    -- Auto-apply keymaps when a terminal opens
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+    -- Auto-apply keymaps when a terminal opens (safe augroup)
+    local group = vim.api.nvim_create_augroup('toggleterm_keymaps', { clear = true })
+    vim.api.nvim_create_autocmd('TermOpen', {
+      group = group,
+      pattern = 'term://*',
+      callback = function()
+        _G.set_terminal_keymaps()
+      end,
+    })
   end
 }

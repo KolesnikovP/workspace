@@ -20,9 +20,12 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local lspconfig = require("lspconfig")
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities
-      })
+      -- Use ts_ls if available, otherwise fallback to tsserver
+      if lspconfig.ts_ls then
+        lspconfig.ts_ls.setup({ capabilities = capabilities })
+      elseif lspconfig.tsserver then
+        lspconfig.tsserver.setup({ capabilities = capabilities })
+      end
       lspconfig.solargraph.setup({
         capabilities = capabilities
       })
@@ -32,15 +35,17 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
-      lspconfig.gopls.setup({  -- Add Go LSP
+      lspconfig.gopls.setup({  -- Go LSP with proper settings nesting
         capabilities = capabilities,
-        gopls = {
-          completeUnimported = true,
-          usePlaceholders = true,
-          analyses = {
-            unusedparams = true,
-          }
-        }
+        settings = {
+          gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+              unusedparams = true,
+            },
+          },
+        },
       })
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

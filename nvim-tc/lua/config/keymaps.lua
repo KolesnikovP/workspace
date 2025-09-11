@@ -28,7 +28,14 @@ vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
 vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
 vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
-vim.keymap.set('n', '<leader>/', ':CommentToggle<CR>')
+-- Comment toggle (Comment.nvim API)
+vim.keymap.set('n', '<leader>/', function()
+  require('Comment.api').toggle.linewise.current()
+end, { desc = 'Comment line' })
+
+-- Save and clear highlight (to align with which-key labels)
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save' })
+vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>', { desc = 'No highlight' })
 
 -- Tabs Buffer navigation 
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>')
@@ -41,12 +48,3 @@ vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
 vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<CR>")
 vim.keymap.set("n", "<leader>th", ":ToggleTerm direction=horizontal<CR>")
 vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical size=40<CR>")
-    local opts = {buffer = 0}
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-
