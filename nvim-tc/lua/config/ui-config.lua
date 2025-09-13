@@ -16,6 +16,17 @@ vim.cmd [[
   highlight PmenuSbar guibg=NONE
   highlight PmenuThumb guibg=NONE
 
+  " Make Visual selection clearly visible
+  " Option A: Gray 500 (lighter, more obvious)
+  " highlight Visual guibg=#6B7280 guifg=NONE
+  " Option B: Gray 600 (balanced, likely best fit)
+  highlight Visual guibg=#4B5563 guifg=NONE
+  " Option C: Slate (darker, subtle but visible)
+  " highlight Visual guibg=#3A3F4B guifg=NONE
+
+  " Neo-tree: highlight only the cursor line with same tone
+  highlight NeoTreeCursorLine guibg=#4B5563 guifg=NONE
+
   highlight TelescopeNormal guibg=NONE
   highlight TelescopeBorder guifg=#aaaaaa guibg=NONE
   highlight TelescopePromptNormal guibg=NONE
