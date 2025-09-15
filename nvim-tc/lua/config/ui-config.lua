@@ -37,4 +37,11 @@ vim.cmd [[
   highlight TelescopePreviewBorder guifg=#aaaaaa guibg=NONE
 
   highlight WhichKeyBorder guifg=#aaaaaa
+
+  " Which-key text colors (regular/normal)
+  highlight WhichKey guibg=NONE guifg=NONE
+  highlight WhichKeyGroup guibg=NONE guifg=#f38ba8
+  highlight WhichKeyDesc guibg=NONE guifg=#cdd6f4
+  highlight WhichKeySeparator guibg=NONE guifg=#585b70
+  highlight WhichKeyValue guibg=NONE guifg=#cdd6f4
 ]]

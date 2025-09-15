@@ -18,6 +18,13 @@ vim.keymap.set('n', 'gd', builtin.lsp_definitions,
 -- Diagnostics
 vim.keymap.set('n', '<leader>do', ':lua vim.diagnostic.open_float()<CR>')
 
+-- LSP Mappings
+vim.keymap.set('n', '<leader>ld', ':lua vim.diagnostic.open_float()<CR>', { desc = 'LSP Diagnostic' })
+vim.keymap.set('n', '<leader>lD', ':lua vim.diagnostic.open_float()<CR>', { desc = 'LSP Hover Diagnostic' })
+vim.keymap.set('n', '<leader>lf', ':lua vim.lsp.buf.format()<CR>', { desc = 'LSP Format' })
+vim.keymap.set('n', '<leader>lr', ':lua vim.lsp.buf.rename()<CR>', { desc = 'LSP Rename' })
+vim.keymap.set('n', '<leader>la', ':lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP Action' })
+
 -- NEOTREE
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left <CR>') -- carriage return 
 vim.keymap.set('n', '<leader>E', ':Neotree float reveal<CR>')

@@ -15,29 +15,46 @@ return {
         f = {
           name = "Find",
           f = {"Find File"},
+          g = {"Find Text"}, -- live_grep
           b = {"Find Buffer"},
-          h = {"Find Help"},
-          w = {"Find Text"}
+          h = {"Find Help"}
         },
         e = {"File Manager"},
-        o = {"Git status"},
+        E = {"File Manager (Float)"},
+        o = {"Git Status"},
         x = {"Close Buffer"},
+        X = {"Close Right Buffers"},
         w = {"Save"},
-        t = {name = "Terminal", f = {"Float terminal"}, h = {"Horizontal terminal"}},
         h = {"No highlight"},
-        g = {name = "Git", b = "Branches", c = "Commits", s = "Status"},
-        c = {name = "Comment", l = "Comment Line"},
+        ["<leader>"] = {"Comment Line"}, -- <leader>/
+        t = {
+          name = "Terminal",
+          f = {"Float Terminal"},
+          h = {"Horizontal Terminal"},
+          v = {"Vertical Terminal"}
+        },
+        g = {
+          name = "Git",
+          b = {"Git Branches"},
+          c = {"Git Commits"},
+          s = {"Git Status"}
+        },
         l = {
           name = "LSP",
-          d = "Diagnostic",
-          D = "Hover diagnostic",
-          f = "Format",
-          r = "Rename",
-          a = "Action",
-          s = "Symbol"
-        }
+          d = {"Diagnostic"},
+          D = {"Hover Diagnostic"},
+          f = {"Format"},
+          r = {"Rename"},
+          a = {"Code Action"},
+          s = {"Document Symbols"}
+        },
+        d = {
+          name = "Diagnostics",
+          o = {"Open Float"}
+        },
+        s = {"Sort Tabs"}
       },
-      {prefix = "<leader>"})
+      { prefix = "<leader>" })
     end
   }
 }
