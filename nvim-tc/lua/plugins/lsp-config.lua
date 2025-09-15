@@ -48,11 +48,22 @@ return {
         },
       })
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
-        max_width = 120,
-      })
+local border = "rounded"
 
+vim.lsp.handlers["textDocument/hover"] =
+  vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/signatureHelp"] =
+  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+vim.diagnostic.config({ float = { border = border } })
+
+-- FIX: something overrides borders for a hover and without this it doesn't work.
+-- Hard override: catches any hover that bypasses the above
+local orig = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig(contents, syntax, opts, ...)
+end
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
       vim.keymap.set('n', '<leader>gd', vim.lsp.buf.declaration, {})
       vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
