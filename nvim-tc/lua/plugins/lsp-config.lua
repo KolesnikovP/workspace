@@ -19,34 +19,35 @@ return {
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      local lspconfig = require("lspconfig")
-      -- Use ts_ls if available, otherwise fallback to tsserver
-      if lspconfig.ts_ls then
-        lspconfig.ts_ls.setup({ capabilities = capabilities })
-      elseif lspconfig.tsserver then
-        lspconfig.tsserver.setup({ capabilities = capabilities })
+      -- Configure servers using Neovim 0.11+ API
+      -- TypeScript: prefer ts_ls if available in runtime, else tsserver
+      if vim.lsp.get_clients and (vim.tbl_get(require('lspconfig') or {}, 'ts_ls') ~= nil) then
+        vim.lsp.config.ts_ls = { capabilities = capabilities }
+      else
+        vim.lsp.config.tsserver = { capabilities = capabilities }
       end
-      lspconfig.solargraph.setup({
-        capabilities = capabilities
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities
-      })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.gopls.setup({  -- Go LSP with proper settings nesting
+
+      vim.lsp.config.solargraph = {
+        capabilities = capabilities,
+      }
+      vim.lsp.config.html = {
+        capabilities = capabilities,
+      }
+      vim.lsp.config.lua_ls = {
+        capabilities = capabilities,
+      }
+      vim.lsp.config.gopls = {
         capabilities = capabilities,
         settings = {
           gopls = {
             completeUnimported = true,
             usePlaceholders = true,
-            analyses = {
-              unusedparams = true,
-            },
+            analyses = { unusedparams = true },
           },
         },
-      })
+      }
+
+      -- Global auto-enable removed; servers will start for matching buffers
 
 local border = "rounded"
 
@@ -64,10 +65,10 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts.border = opts.border or border
   return orig(contents, syntax, opts, ...)
 end
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-      vim.keymap.set('n', '<leader>gd', vim.lsp.buf.declaration, {})
-      vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP Hover' })
+      vim.keymap.set('n', '<leader>gd', vim.lsp.buf.declaration, { desc = 'LSP Declaration' })
+      vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, { desc = 'LSP References' })
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
     end
   }
 }
