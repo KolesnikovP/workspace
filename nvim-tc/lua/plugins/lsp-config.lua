@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {"lua_ls", "gopls"}
+        ensure_installed = {"lua_ls", "gopls", "tailwindcss"}
       })
     end
   },
@@ -38,6 +38,20 @@ return {
       }
       vim.lsp.config.html = {
         capabilities = capabilities,
+      }
+      -- Tailwind CSS LSP for class name IntelliSense
+      vim.lsp.config.tailwindcss = {
+        capabilities = capabilities,
+        settings = {
+          tailwindCSS = {
+            experimental = {
+              classRegex = {
+                { "tw`([^`]*)", "tw\\.[^`]+`([^`]*)`" },
+                { "cva%(([^)]*)%)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+              },
+            },
+          },
+        },
       }
       vim.lsp.config.lua_ls = {
         capabilities = capabilities,

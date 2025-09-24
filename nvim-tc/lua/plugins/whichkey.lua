@@ -17,7 +17,8 @@ return {
           f = {"Find File"},
           g = {"Find Text"}, -- live_grep
           b = {"Find Buffer"},
-          h = {"Find Help"}
+          h = {"Find Help"},
+          r = {"Recent Files"}
         },
         e = {"File Manager"},
         E = {"File Manager (Float)"},

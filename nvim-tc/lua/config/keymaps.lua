@@ -4,6 +4,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Telescope recent files' })
 
 -- Check how it works
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
@@ -55,4 +56,3 @@ vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
 vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<CR>")
 vim.keymap.set("n", "<leader>th", ":ToggleTerm direction=horizontal<CR>")
 vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical size=40<CR>")
-
