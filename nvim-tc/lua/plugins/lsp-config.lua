@@ -20,8 +20,14 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Configure servers using Neovim 0.11+ API
-      -- TypeScript: prefer ts_ls if available in runtime, else tsserver
-      if vim.lsp.get_clients and (vim.tbl_get(require('lspconfig') or {}, 'ts_ls') ~= nil) then
+      -- TypeScript: prefer ts_ls if mason-lspconfig exposes it; else tsserver
+      local ok_mlsp, mlsp = pcall(require, 'mason-lspconfig')
+      local prefer_ts_ls = false
+      if ok_mlsp and mlsp.get_available_servers then
+        local available = mlsp.get_available_servers() or {}
+        prefer_ts_ls = vim.tbl_contains(available, 'ts_ls')
+      end
+      if prefer_ts_ls then
         vim.lsp.config.ts_ls = { capabilities = capabilities }
       else
         vim.lsp.config.tsserver = { capabilities = capabilities }
