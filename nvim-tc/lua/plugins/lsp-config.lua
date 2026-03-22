@@ -1,15 +1,15 @@
 return {
   {
-  "williamboman/mason.nvim",
-  config = function()
-    require("mason").setup()
-  end
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {"lua_ls", "gopls", "tailwindcss"}
+        ensure_installed = { "lua_ls", "gopls", "tailwindcss", "sqls" }
       })
     end
   },
@@ -46,7 +46,7 @@ return {
           tailwindCSS = {
             experimental = {
               classRegex = {
-                { "tw`([^`]*)", "tw\\.[^`]+`([^`]*)`" },
+                { "tw`([^`]*)",     "tw\\.[^`]+`([^`]*)`" },
                 { "cva%(([^)]*)%)", "[\"'`]([^\"'`]*).*?[\"'`]" },
               },
             },
@@ -66,25 +66,39 @@ return {
           },
         },
       }
+      vim.lsp.config.sqls = {
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          -- optional: LSP keymaps unique to SQL
+          local map = function(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+          end
+          map("n", "K", vim.lsp.buf.hover)
+          map("n", "gd", vim.lsp.buf.definition)
+          map("n", "<leader>rn", vim.lsp.buf.rename)
+          map("n", "<leader>ca", vim.lsp.buf.code_action)
+        end,
+      }
 
       -- Global auto-enable removed; servers will start for matching buffers
 
-local border = "rounded"
+      local border = "rounded"
 
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
-vim.diagnostic.config({ float = { border = border } })
+      vim.lsp.handlers["textDocument/hover"] =
+          vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+      vim.lsp.handlers["textDocument/signatureHelp"] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+      vim.diagnostic.config({ float = { border = border } })
 
--- FIX: something overrides borders for a hover and without this it doesn't work.
--- Hard override: catches any hover that bypasses the above
-local orig = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return orig(contents, syntax, opts, ...)
-end
+      -- FIX: something overrides borders for a hover and without this it doesn't work.
+      -- Hard override: catches any hover that bypasses the above
+      local orig = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or border
+        return orig(contents, syntax, opts, ...)
+      end
+
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP Hover' })
       vim.keymap.set('n', '<leader>gd', vim.lsp.buf.declaration, { desc = 'LSP Declaration' })
       vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, { desc = 'LSP References' })
